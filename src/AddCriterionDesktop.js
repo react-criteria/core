@@ -53,7 +53,7 @@ function AddCriterionDesktop (props) {
 
     return {
       x: info.right,
-      y: info.y + 60
+      y: info.top + 60
     }
   }
 

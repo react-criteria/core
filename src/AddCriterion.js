@@ -60,11 +60,11 @@ function AddCriterion (props) {
   return (
     <>
       <Select
-        gutterBottom
         autoFocus
+        gutterBottom
+        label={i18nType}
         options={criteriaOptions}
         value={selectedCriterion}
-        label={i18nType}
         onChange={setSelectedCriterion}
       />
 

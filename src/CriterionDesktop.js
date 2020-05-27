@@ -146,8 +146,8 @@ function CriterionDesktop (props) {
     const info = rootElementRef.current.getBoundingClientRect()
 
     return {
-      x: info.x,
-      y: info.y + 60
+      x: info.left,
+      y: info.top + 60
     }
   }
 
