@@ -3,7 +3,7 @@
 
   <br />
 
-  <img width="601" alt="Screenshot 2020-05-26 at 21 03 33" src="https://user-images.githubusercontent.com/5364897/82940042-87c48180-9f94-11ea-8724-fa74f63c43e6.png">
+  <img width="500" alt="Screenshot 2020-05-26 at 21 03 33" src="https://user-images.githubusercontent.com/5364897/82940042-87c48180-9f94-11ea-8724-fa74f63c43e6.png">
 </div>
 
 ## Why?
@@ -113,6 +113,10 @@ function MyComponent () {
 export default React.memo(MyComponent)
 ```
 
+<div align="center">
+  <img width="500" alt="Basic usage example preview" src="https://user-images.githubusercontent.com/5364897/83048286-a89ade80-a049-11ea-96f8-ddbb30daf0f0.png">
+</div>
+
 ### Theme
 
 ```javascript
@@ -159,6 +163,10 @@ function MyComponent () {
 export default React.memo(MyComponent)
 ```
 
+<div align="center">
+  <img width="500" alt="Theme example preview" src="https://user-images.githubusercontent.com/5364897/83048289-aa64a200-a049-11ea-82d8-97099929660f.png">
+</div>
+
 ### Internationalization
 
 ```javascript
@@ -196,6 +204,10 @@ function MyComponent () {
 
 export default React.memo(MyComponent)
 ```
+
+<div align="center">
+  <img width="503" alt="Internationalization example preview" src="https://user-images.githubusercontent.com/5364897/83048295-ab95cf00-a049-11ea-8ae9-105c7404374d.png">
+</div>
 
 ## License
 
