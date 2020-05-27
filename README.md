@@ -4,7 +4,14 @@
   <br />
 
   <img width="500" alt="Screenshot 2020-05-26 at 21 03 33" src="https://user-images.githubusercontent.com/5364897/82940042-87c48180-9f94-11ea-8724-fa74f63c43e6.png">
+
+  [![Build Status](https://travis-ci.org/react-criteria/core.svg?branch=master)](https://travis-ci.org/react-criteria/core)
+  [![codecov](https://codecov.io/gh/react-criteria/core/branch/master/graph/badge.svg)](https://codecov.io/gh/react-criteria/core)
+
+  <hr />
 </div>
+
+
 
 ## Why?
 
