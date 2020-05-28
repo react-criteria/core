@@ -7,6 +7,7 @@
 
   [![Build Status](https://travis-ci.org/react-criteria/core.svg?branch=master)](https://travis-ci.org/react-criteria/core)
   [![codecov](https://codecov.io/gh/react-criteria/core/branch/master/graph/badge.svg)](https://codecov.io/gh/react-criteria/core)
+  [![npm version](https://badge.fury.io/js/react-criteria.svg)](https://badge.fury.io/js/react-criteria)
 
   <hr />
 </div>

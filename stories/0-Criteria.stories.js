@@ -85,6 +85,37 @@ export const Default = () => {
   )
 }
 
+export const NoAddableCriterions = () => {
+  const [data] = React.useState(
+    [{
+      type: 'beds',
+      value: '2'
+    }]
+  )
+
+  return (
+    <Criteria
+      data={data}
+      criteria={{
+        beds: {
+          label: 'Beds',
+          addable: false,
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 3,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of beds'
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+
 export const Theme = () => {
   const theme = createTheme({
     palette: {
