@@ -4,6 +4,7 @@ import Button from './Button'
 import Popover from './Popover'
 import AddCriterion from './AddCriterion'
 import useI18nLabel from './hooks/useI18nLabel'
+import useCriterionAddableChecker from './hooks/useCriterionAddableChecker'
 
 AddCriterionDesktop.propTypes = {
   onAdd: PropTypes.func,
@@ -23,6 +24,7 @@ function AddCriterionDesktop (props) {
   } = props
 
   const rootElementRef = React.useRef(null)
+  const isCriterionAddable = useCriterionAddableChecker(criteria)
 
   const i18nAdd = useI18nLabel('criteria.add-criterion-add')
   const i18nAddPopoverTitle = useI18nLabel('criteria.add-criterion-title')
@@ -60,33 +62,35 @@ function AddCriterionDesktop (props) {
   const offset = getOffset()
 
   return (
-    <div ref={rootElementRef}>
-      <Button
-        variant='primary'
-        disabled={disabled}
-        aria-expanded={active}
-        onClick={toggleActiveState}
-      >
-        {i18nAdd}
-      </Button>
+    isCriterionAddable === true && (
+      <div ref={rootElementRef}>
+        <Button
+          variant='primary'
+          disabled={disabled}
+          aria-expanded={active}
+          onClick={toggleActiveState}
+        >
+          {i18nAdd}
+        </Button>
 
-      {
-        active === true && (
-          <Popover
-            top={offset.y}
-            right={offset.x}
-            onClose={onPopoverClose}
-            title={i18nAddPopoverTitle}
-            description={i18nAddPopoverDesc}
-          >
-            <AddCriterion
-              criteria={criteria}
-              onSubmit={onAdd}
-            />
-          </Popover>
-        )
-      }
-    </div>
+        {
+          active === true && (
+            <Popover
+              top={offset.y}
+              right={offset.x}
+              onClose={onPopoverClose}
+              title={i18nAddPopoverTitle}
+              description={i18nAddPopoverDesc}
+            >
+              <AddCriterion
+                criteria={criteria}
+                onSubmit={onAdd}
+              />
+            </Popover>
+          )
+        }
+      </div>
+    )
   )
 }
 

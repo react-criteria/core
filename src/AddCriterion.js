@@ -40,14 +40,18 @@ function AddCriterion (props) {
         value: '',
         label: i18nTypePlaceholder
       },
-      ...Object.keys(criteria).map(key => {
+      ...Object.keys(criteria).reduce((options, key) => {
         const criterionInfo = criteria[key]
 
-        return {
+        if (criterionInfo.addable === false) return options
+
+        options.push({
           value: key,
           label: criterionInfo.label
-        }
-      })
+        })
+
+        return options
+      }, [])
     ]
   }, [criteria, i18nTypePlaceholder])
 

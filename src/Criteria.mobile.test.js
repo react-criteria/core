@@ -243,6 +243,163 @@ describe('Criteria Mobile Viewport Tests', () => {
     })
   })
 
+  describe('Rendering a Criteria component without an addable criterion', () => {
+    describe('When rendering a Criteria component without and addable criterion', () => {
+      let info = null
+
+      beforeEach(() => {
+        const data = [{
+          type: 'criterionOne',
+          value: 'criterion-one-value'
+        }, {
+          type: 'criterionTwo',
+          value: 'criterion-two-value'
+        }]
+
+        const criteria = {
+          criterionOne: {
+            label: 'Criterion One',
+            addable: false,
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion one'
+              }
+            }
+          },
+          criterionTwo: {
+            label: 'Criterion Two',
+            addable: false,
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion two'
+              }
+            }
+          },
+          criterionThree: {
+            label: 'Criterion Three',
+            addable: false,
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion three'
+              }
+            }
+          }
+        }
+
+        info = render(
+          <Criteria
+            data={data}
+            criteria={criteria}
+            onChange={jest.fn()}
+          />
+        )
+
+        fireEvent.click(info.getByText('Manage Criteria (2)'))
+      })
+
+      it('should hide the Add button', () => {
+        expect(info.queryByText('Add')).not.toBeInTheDocument()
+      })
+
+      it('should display the value of the criteria accordingly', () => {
+        expect(info.queryByText('Criterion One')).toBeInTheDocument()
+        expect(info.queryByText('Criterion Two')).toBeInTheDocument()
+        expect(info.queryByText('criterion-one-value')).toBeInTheDocument()
+        expect(info.queryByText('criterion-two-value')).toBeInTheDocument()
+
+        expect(info.queryByText('Criterion Three')).not.toBeInTheDocument()
+      })
+    })
+  })
+
+  describe('Rendering a Criteria component with a mix of addable and unaddable criterions', () => {
+    describe('When rendering a Criteria component with a mix of addable and unaddable criterions', () => {
+      let info = null
+
+      beforeEach(() => {
+        const data = [{
+          type: 'criterionOne',
+          value: 'criterion-one-value'
+        }, {
+          type: 'criterionTwo',
+          value: 'criterion-two-value'
+        }]
+
+        const criteria = {
+          criterionOne: {
+            label: 'Criterion One',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion one'
+              }
+            }
+          },
+          criterionTwo: {
+            label: 'Criterion Two',
+            addable: false,
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion two'
+              }
+            }
+          },
+          criterionThree: {
+            label: 'Criterion Three',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion three'
+              }
+            }
+          }
+        }
+
+        info = render(
+          <Criteria
+            data={data}
+            criteria={criteria}
+            onChange={jest.fn()}
+          />
+        )
+
+        fireEvent.click(info.getByText('Manage Criteria (2)'))
+      })
+
+      it('should restrict you from adding unaddable criterions', () => {
+        fireEvent.click(info.getByText('Add'))
+
+        // There should only be 1 `Criterion Two` - showing the summary.
+        expect(info.getAllByText('Criterion Two').length).toBe(1)
+      })
+
+      it('should display the value of the criteria accordingly', () => {
+        expect(info.queryByText('Criterion One')).toBeInTheDocument()
+        expect(info.queryByText('Criterion Two')).toBeInTheDocument()
+        expect(info.queryByText('criterion-one-value')).toBeInTheDocument()
+        expect(info.queryByText('criterion-two-value')).toBeInTheDocument()
+
+        expect(info.queryByText('Criterion Three')).not.toBeInTheDocument()
+      })
+    })
+  })
+
   describe('Customizing a criterion value', () => {
     describe('When rendering a Criteria component with a criterion configured to customize its value', () => {
       let info = null
@@ -277,6 +434,17 @@ describe('Criteria Mobile Viewport Tests', () => {
                 value: '',
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
+              }
+            }
+          },
+          criterionThree: {
+            label: 'Criterion Three',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion three'
               }
             }
           }
@@ -343,6 +511,17 @@ describe('Criteria Mobile Viewport Tests', () => {
                 placeholder: 'Enter value for criterion two'
               }
             }
+          },
+          criterionThree: {
+            label: 'Criterion Three',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion three'
+              }
+            }
           }
         }
 
@@ -362,6 +541,8 @@ describe('Criteria Mobile Viewport Tests', () => {
         expect(info.queryByText('Criterion Two')).toBeInTheDocument()
         expect(info.queryByText('criterion-one-value')).toBeInTheDocument()
         expect(info.queryByText('criterion-two-value')).toBeInTheDocument()
+
+        expect(info.queryByText('Criterion Three')).not.toBeInTheDocument()
 
         expect(info.queryByText('criteria-invalid-value'))
           .not.toBeInTheDocument()
