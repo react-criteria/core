@@ -85,17 +85,13 @@ export const Default = () => {
   )
 }
 
-export const NoAddableCriterions = () => {
-  const [data] = React.useState(
-    [{
-      type: 'beds',
-      value: '2'
-    }]
-  )
-
+export const UnaddableCriterions = () => {
   return (
     <Criteria
-      data={data}
+      data={[{
+        type: 'beds',
+        value: '2'
+      }]}
       criteria={{
         beds: {
           label: 'Beds',
@@ -108,6 +104,78 @@ export const NoAddableCriterions = () => {
               type: 'number',
               autoFocus: true,
               placeholder: 'Enter number of beds'
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+
+export const UndeleteableCriterions = () => {
+  const [data, setData] = React.useState(
+    [{
+      type: 'location',
+      value: '1',
+      deleteable: false
+    }]
+  )
+
+  const onChange = React.useCallback(newData => {
+    setData(newData)
+    action('onDataChange')(newData)
+  }, [])
+
+  const locations = [
+    'Malta', 'Italy', 'Spain', 'France', 'Germany'
+  ]
+
+  return (
+    <Criteria
+      data={data}
+      onChange={onChange}
+      criteria={{
+        guests: {
+          label: 'Guests',
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 6,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of guests'
+            }
+          }
+        },
+        beds: {
+          label: 'Beds',
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 3,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of beds'
+            }
+          }
+        },
+        location: {
+          label: 'Location',
+          value: value => locations[value],
+          component: {
+            component: Select,
+            props: {
+              autoFocus: true,
+              options: locations.map(
+                (location, index) => {
+                  return {
+                    value: String(index),
+                    label: location
+                  }
+                }
+              )
             }
           }
         }
@@ -165,11 +233,13 @@ export const Localized = () => {
 
     'add-criterion.submit': 'Invia',
     'add-criterion.type': 'Tipo di criterio',
-    'add-criterion.type-placeholder': 'Seleziona il tipo di crition',
+    'add-criterion.type-placeholder': 'Seleziona il tipo di criterio',
 
     'criterion.submit': 'Invia',
     'criterion.cancel': 'Annulla',
-    'criterion.remove': 'Rimuovere'
+    'criterion.remove': 'Rimuovere',
+
+    'popover.overlay-title': 'Chuidi l criterio'
   }
 
   return (

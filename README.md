@@ -196,11 +196,13 @@ function MyComponent () {
 
     'add-criterion.submit': 'Invia',
     'add-criterion.type': 'Tipo di criterio',
-    'add-criterion.type-placeholder': 'Seleziona il tipo di crition',
+    'add-criterion.type-placeholder': 'Seleziona il tipo di criterio',
 
     'criterion.submit': 'Invia',
     'criterion.cancel': 'Annulla',
-    'criterion.remove': 'Rimuovere'
+    'criterion.remove': 'Rimuovere',
+
+    'popover.overlay-title': 'Chuidi l criterio'
   }
 
   return (

@@ -17,5 +17,7 @@ export default React.createContext({
 
   'criterion.submit': 'Submit',
   'criterion.cancel': 'Cancel',
-  'criterion.remove': 'Remove'
+  'criterion.remove': 'Remove',
+
+  'popover.overlay-title': 'Close Criterion'
 })
