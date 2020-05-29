@@ -64,6 +64,7 @@ CriterionDesktop.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onDelete: PropTypes.func,
+  deleteable: PropTypes.bool,
   onActiveChange: PropTypes.func,
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
@@ -78,6 +79,7 @@ CriterionDesktop.propTypes = {
 function CriterionDesktop (props) {
   const {
     value,
+    deleteable,
     criterionInfo,
     active = false,
     disabled = false,
@@ -174,12 +176,13 @@ function CriterionDesktop (props) {
           <Popover
             top={offset.y}
             left={offset.x}
-            onClose={onPopoverClose}
             title={i18nPopoverTitle}
             description={i18nPopoverDesc}
+            onClose={onPopoverClose}
           >
             <Criterion
               value={value}
+              deleteable={deleteable}
               onChange={onChange}
               onDelete={onDelete}
               onCancel={onPopoverClose}

@@ -13,10 +13,11 @@ const useStyles = createUseStyles({
 })
 
 Criterion.propTypes = {
-  value: PropTypes.string,
   onChange: PropTypes.func,
   onDelete: PropTypes.func,
   onCancel: PropTypes.func,
+  deleteable: PropTypes.bool,
+  value: PropTypes.string.isRequired,
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
     label: PropTypes.string,
@@ -31,6 +32,7 @@ function Criterion (props) {
   const {
     criterionInfo,
     value: valueProp,
+    deleteable = true,
     onChange: onChangeProp,
     onDelete: onDeleteProp,
     onCancel: onCancelProp
@@ -85,9 +87,13 @@ function Criterion (props) {
           {i18nCancel}
         </Button>
 
-        <Button onClick={onDelete}>
-          {i18nRemove}
-        </Button>
+        {
+          deleteable !== false && (
+            <Button onClick={onDelete}>
+              {i18nRemove}
+            </Button>
+          )
+        }
       </div>
     </div>
   )

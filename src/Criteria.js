@@ -23,6 +23,7 @@ Criteria.propTypes = {
   criteria: PropTypes.object,
   data: PropTypes.arrayOf(
     PropTypes.shape({
+      deleteable: PropTypes.bool,
       type: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired
     })

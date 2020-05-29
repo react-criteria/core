@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 import { useTheme } from './Theme'
 import useDOMID from 'use-dom-id'
+import useI18nLabel from './hooks/useI18nLabel'
 import useWindowWidth from './hooks/useWindowWidth'
 
 const useStyles = createUseStyles({
@@ -59,6 +60,8 @@ function Popover (props) {
   const titleID = useDOMID('modal-title')
   const descriptionID = useDOMID('modal-description')
 
+  const i18nOverlayTitle = useI18nLabel('popover.overlay-title')
+
   const [rootElementInfo, setRootElementInfo] = React.useState(null)
 
   const onClose = React.useCallback(() => {
@@ -100,6 +103,7 @@ function Popover (props) {
     <>
       <div
         onClick={onClose}
+        title={i18nOverlayTitle}
         className={classes.overlay}
       />
 

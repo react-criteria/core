@@ -550,6 +550,77 @@ describe('Criteria Mobile Viewport Tests', () => {
     })
   })
 
+  describe('Specifying an undeleteable criterion', () => {
+    describe('Given a Criteria component with an undeleteable criterion', () => {
+      let info = null
+
+      beforeEach(() => {
+        const data = [{
+          deleteable: false,
+          type: 'criterionOne',
+          value: 'criterion-one-value'
+        }, {
+          type: 'criterionTwo',
+          value: 'criterion-two-value'
+        }]
+
+        const criteria = {
+          criterionOne: {
+            label: 'Criterion One',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion one'
+              }
+            }
+          },
+          criterionTwo: {
+            label: 'Criterion Two',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion two'
+              }
+            }
+          },
+          criterionThree: {
+            label: 'Criterion Three',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion three'
+              }
+            }
+          }
+        }
+
+        info = render(
+          <Criteria
+            data={data}
+            criteria={criteria}
+            onChange={jest.fn()}
+          />
+        )
+
+        fireEvent.click(info.getByText('Manage Criteria (2)'))
+      })
+
+      it('should not allow the user to delete the undeleteable criterion', () => {
+        fireEvent.click(info.getByText('Criterion One'))
+        expect(info.queryByText('Remove')).not.toBeInTheDocument()
+
+        fireEvent.click(info.getByText('Criterion Two'))
+        expect(info.queryByText('Remove')).toBeInTheDocument()
+      })
+    })
+  })
+
   describe('Clicking on a criterion', () => {
     describe('Given a Criteria component', () => {
       let info = null
@@ -704,7 +775,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               fireEvent.click(info.getAllByText('Criterion One')[0])
             })
 
-            it('should close criterion panel', () => {
+            it('should close the criterion panel', () => {
               expect(info.queryByLabelText('Criterion One'))
                 .not.toBeInTheDocument()
             })
@@ -796,7 +867,7 @@ describe('Criteria Mobile Viewport Tests', () => {
             fireEvent.click(info.getByText('Cancel'))
           })
 
-          it('should close criterion panel', () => {
+          it('should close the criterion panel', () => {
             expect(info.queryByLabelText('Criterion One'))
               .not.toBeInTheDocument()
           })
@@ -809,7 +880,7 @@ describe('Criteria Mobile Viewport Tests', () => {
     })
   })
 
-  describe('Adding a new Criterion', () => {
+  describe('Adding a new criterion', () => {
     describe('Given a Criteria component', () => {
       let info = null
       let onChange = null
@@ -913,7 +984,7 @@ describe('Criteria Mobile Viewport Tests', () => {
     })
   })
 
-  describe('Removing an existing Criterion', () => {
+  describe('Removing an existing criterion', () => {
     describe('Given a Criteria component', () => {
       let info = null
       let onChange = null
@@ -999,7 +1070,7 @@ describe('Criteria Mobile Viewport Tests', () => {
     })
   })
 
-  describe('Updating an existing Criterion', () => {
+  describe('Updating an existing criterion', () => {
     describe('Given a Criteria component', () => {
       let info = null
       let onChange = null
