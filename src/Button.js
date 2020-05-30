@@ -48,6 +48,7 @@ const useStyles = createUseStyles({
 
 Button.propTypes = {
   maxWidth: PropTypes.bool,
+  children: PropTypes.string,
   variant: PropTypes.oneOf(['primary', 'secondary'])
 }
 

@@ -64,7 +64,6 @@ function AddCriterion (props) {
   return (
     <>
       <Select
-        autoFocus
         gutterBottom
         label={i18nType}
         options={criteriaOptions}

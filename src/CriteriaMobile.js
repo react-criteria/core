@@ -139,10 +139,10 @@ function CriteriaMobile (props) {
               </Button>
             ]}
           >
-
+            <>
             {criterionDOM}
-
             {addCriterionDOM}
+            </>
           </Modal>
         )
       }

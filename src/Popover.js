@@ -43,6 +43,7 @@ Popover.propTypes = {
   right: PropTypes.number,
   title: PropTypes.string,
   onClose: PropTypes.func,
+  children: PropTypes.element,
   description: PropTypes.string
 }
 
@@ -103,6 +104,7 @@ function Popover (props) {
     <>
       <div
         onClick={onClose}
+        aria-hidden={true}
         title={i18nOverlayTitle}
         className={classes.overlay}
       />
