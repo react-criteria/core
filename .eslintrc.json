@@ -1,6 +1,12 @@
 {
-  "env": { "browser": true },
   "parser": "babel-eslint",
+  "env": { "browser": true },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended"
+  ],
   "rules": {
     "jsx-a11y/no-onchange": ["off"],
     "react/jsx-closing-tag-location": ["error"],
@@ -10,11 +16,5 @@
       "error",
       { "varsIgnorePattern": "^_+" }
     ]
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:react-hooks/recommended"
-  ]
+  }
 }
