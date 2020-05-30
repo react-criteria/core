@@ -48,6 +48,7 @@ const useStyle = createUseStyles({
 
 Modal.propTypes = {
   title: PropTypes.string,
+  children: PropTypes.element,
   description: PropTypes.string,
   actions: PropTypes.arrayOf(PropTypes.object)
 }

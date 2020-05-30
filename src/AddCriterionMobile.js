@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 import Button from './Button'
 import AddCriterion from './AddCriterion'
@@ -10,6 +11,13 @@ const useStyles = createUseStyles({
     padding: '16px 16px'
   }
 })
+
+AddCriterionMobile.propTypes = {
+  onAdd: PropTypes.func,
+  active: PropTypes.bool,
+  criteria: PropTypes.object,
+  onActiveChange: PropTypes.func
+}
 
 function AddCriterionMobile (props) {
   const {
