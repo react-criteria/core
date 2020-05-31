@@ -1,8 +1,8 @@
 import React from 'react'
+import useDOMID from 'use-dom-id'
 import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 import { useTheme } from './Theme'
-import useDOMID from 'use-dom-id'
 import useI18nLabel from './hooks/useI18nLabel'
 import useWindowWidth from './hooks/useWindowWidth'
 
@@ -103,19 +103,19 @@ function Popover (props) {
   return (
     <>
       <div
-        onClick={onClose}
         aria-hidden={true}
         title={i18nOverlayTitle}
         className={classes.overlay}
+        onClick={onClose}
       />
 
       <div
         role='dialog'
-        aria-labelledby={titleID}
-        aria-describedby={descriptionID}
         ref={rootElementRef}
         style={{ top, left }}
         className={classes.root}
+        aria-labelledby={titleID}
+        aria-describedby={descriptionID}
       >
         <div
           id={titleID}

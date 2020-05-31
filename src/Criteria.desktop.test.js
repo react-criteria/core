@@ -1,5 +1,4 @@
 import React from 'react'
-import '@testing-library/jest-dom'
 import useDOMID from 'use-dom-id'
 import { act, render, fireEvent } from '@testing-library/react'
 
@@ -94,18 +93,10 @@ describe('Criteria Desktop Viewport Tests', () => {
   })
 
   describe('Rendering a Criteria component without an addable criterion', () => {
-    describe('When rendering a Criteria component without and addable criterion', () => {
+    describe('When rendering a Criteria component without an addable criterion', () => {
       let info = null
 
       beforeEach(() => {
-        const data = [{
-          type: 'criterionOne',
-          value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
-        }]
-
         const criteria = {
           criterionOne: {
             label: 'Criterion One',
@@ -118,53 +109,20 @@ describe('Criteria Desktop Viewport Tests', () => {
                 placeholder: 'Enter value for criterion one'
               }
             }
-          },
-          criterionTwo: {
-            label: 'Criterion Two',
-            addable: false,
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            addable: false,
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
-              }
-            }
           }
         }
 
         info = render(
           <Criteria
-            data={data}
+            data={[]}
             criteria={criteria}
             onChange={jest.fn()}
           />
         )
       })
 
-      it('should hide the Add button', () => {
+      it('should not give the option to the user to add any criterions', () => {
         expect(info.queryByText('Add')).not.toBeInTheDocument()
-      })
-
-      it('should display the value of the criteria accordingly', () => {
-        expect(info.queryByText('Criterion One')).toBeInTheDocument()
-        expect(info.queryByText('Criterion Two')).toBeInTheDocument()
-        expect(info.queryByText('criterion-one-value')).toBeInTheDocument()
-        expect(info.queryByText('criterion-two-value')).toBeInTheDocument()
-
-        expect(info.queryByText('Criterion Three')).not.toBeInTheDocument()
       })
     })
   })
@@ -174,14 +132,6 @@ describe('Criteria Desktop Viewport Tests', () => {
       let info = null
 
       beforeEach(() => {
-        const data = [{
-          type: 'criterionOne',
-          value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
-        }]
-
         const criteria = {
           criterionOne: {
             label: 'Criterion One',
@@ -205,43 +155,23 @@ describe('Criteria Desktop Viewport Tests', () => {
                 placeholder: 'Enter value for criterion two'
               }
             }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
-              }
-            }
           }
         }
 
         info = render(
           <Criteria
-            data={data}
+            data={[]}
             criteria={criteria}
             onChange={jest.fn()}
           />
         )
       })
 
-      it('should restrict you from adding unaddable criterions', () => {
+      it('should only allow the user to add the addable criterions', () => {
         fireEvent.click(info.getByText('Add'))
 
-        // There should only be 1 `Criterion Two` - showing the summary.
-        expect(info.getAllByText('Criterion Two').length).toBe(1)
-      })
-
-      it('should display the value of the criteria accordingly', () => {
         expect(info.queryByText('Criterion One')).toBeInTheDocument()
-        expect(info.queryByText('Criterion Two')).toBeInTheDocument()
-        expect(info.queryByText('criterion-one-value')).toBeInTheDocument()
-        expect(info.queryByText('criterion-two-value')).toBeInTheDocument()
-
-        expect(info.queryByText('Criterion Three')).not.toBeInTheDocument()
+        expect(info.queryByText('Criterion Two')).not.toBeInTheDocument()
       })
     })
   })
@@ -254,9 +184,6 @@ describe('Criteria Desktop Viewport Tests', () => {
         const data = [{
           type: 'criterionOne',
           value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
         }]
 
         const criteria = {
@@ -271,28 +198,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 placeholder: 'Enter value for criterion one'
               }
             }
-          },
-          criterionTwo: {
-            label: 'Criterion Two',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
-              }
-            }
           }
         }
 
@@ -306,13 +211,8 @@ describe('Criteria Desktop Viewport Tests', () => {
       })
 
       it('should display the value of the criteria accordingly', () => {
-        expect(info.queryByText('Criterion One')).toBeInTheDocument()
-        expect(info.queryByText('Criterion Two')).toBeInTheDocument()
         expect(info.queryByText('customized-criterion-one-value'))
           .toBeInTheDocument()
-        expect(info.queryByText('criterion-two-value')).toBeInTheDocument()
-
-        expect(info.queryByText('Criterion Three')).not.toBeInTheDocument()
       })
     })
   })
@@ -325,9 +225,6 @@ describe('Criteria Desktop Viewport Tests', () => {
         const data = [{
           type: 'criterionOne',
           value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
         }, {
           type: 'criteriaInvalid',
           value: 'criteria-invalid-value'
@@ -344,28 +241,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 placeholder: 'Enter value for criterion one'
               }
             }
-          },
-          criterionTwo: {
-            label: 'Criterion Two',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
-              }
-            }
           }
         }
 
@@ -380,12 +255,7 @@ describe('Criteria Desktop Viewport Tests', () => {
 
       it('should only show the criterion with the valid types', () => {
         expect(info.queryByText('Criterion One')).toBeInTheDocument()
-        expect(info.queryByText('Criterion Two')).toBeInTheDocument()
         expect(info.queryByText('criterion-one-value')).toBeInTheDocument()
-        expect(info.queryByText('criterion-two-value')).toBeInTheDocument()
-
-        expect(info.queryByText('Criterion Three')).not.toBeInTheDocument()
-
         expect(info.queryByText('criteria-invalid-value'))
           .not.toBeInTheDocument()
       })
@@ -428,17 +298,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 placeholder: 'Enter value for criterion two'
               }
             }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
-              }
-            }
           }
         }
 
@@ -471,9 +330,6 @@ describe('Criteria Desktop Viewport Tests', () => {
         const data = [{
           type: 'criterionOne',
           value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
         }]
 
         const criteria = {
@@ -485,28 +341,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 value: '',
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
-              }
-            }
-          },
-          criterionTwo: {
-            label: 'Criterion Two',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
               }
             }
           }
@@ -526,15 +360,19 @@ describe('Criteria Desktop Viewport Tests', () => {
           fireEvent.click(info.getByText('Criterion One'))
         })
 
-        it('should open a panel enabling you to modify it', () => {
+        it('should open a panel enabling the user to update it', () => {
           expect(info.getByLabelText('Criterion One').value)
             .toBe('criterion-one-value')
+
+          expect(info.getByText('Submit')).toBeInTheDocument()
+          expect(info.getByText('Cancel')).toBeInTheDocument()
+          expect(info.getByText('Remove')).toBeInTheDocument()
         })
       })
     })
   })
 
-  describe('Clicking on a criterion while it is open', () => {
+  describe('Clicking on a criterion while it is open that has unpersisted changes', () => {
     describe('Given a Criteria component', () => {
       let info = null
       let onChange = null
@@ -545,9 +383,6 @@ describe('Criteria Desktop Viewport Tests', () => {
         const data = [{
           type: 'criterionOne',
           value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
         }]
 
         const criteria = {
@@ -559,28 +394,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 value: '',
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
-              }
-            }
-          },
-          criterionTwo: {
-            label: 'Criterion Two',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
               }
             }
           }
@@ -627,7 +440,7 @@ describe('Criteria Desktop Viewport Tests', () => {
     })
   })
 
-  describe('Clicking on the popover overlay while having an opened criterion', () => {
+  describe('Clicking on the popover overlay while having an opened criterion that has unpersisted changes', () => {
     describe('Given a Criteria component', () => {
       let info = null
       let onChange = null
@@ -638,9 +451,6 @@ describe('Criteria Desktop Viewport Tests', () => {
         const data = [{
           type: 'criterionOne',
           value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
         }]
 
         const criteria = {
@@ -652,28 +462,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 value: '',
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
-              }
-            }
-          },
-          criterionTwo: {
-            label: 'Criterion Two',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
               }
             }
           }
@@ -693,18 +481,27 @@ describe('Criteria Desktop Viewport Tests', () => {
           fireEvent.click(info.getByText('Criterion One'))
         })
 
-        describe('when clicking on the popover overlay', () => {
+        describe('having been updated', () => {
           beforeEach(() => {
-            fireEvent.click(info.getByTitle('Close Criterion'))
+            fireEvent.change(
+              info.queryByLabelText('Criterion One'),
+              { target: { value: 'updated-criterion-one-value' } }
+            )
           })
 
-          it('should close the criterion panel', () => {
-            expect(info.queryByLabelText('Criterion One'))
-              .not.toBeInTheDocument()
-          })
+          describe('when clicking on the popover overlay', () => {
+            beforeEach(() => {
+              fireEvent.click(info.getByTitle('Close Criterion'))
+            })
 
-          it('should not persist the changes', () => {
-            expect(onChange).not.toHaveBeenCalled()
+            it('should close the criterion panel', () => {
+              expect(info.queryByLabelText('Criterion One'))
+                .not.toBeInTheDocument()
+            })
+
+            it('should not persist the changes', () => {
+              expect(onChange).not.toHaveBeenCalled()
+            })
           })
         })
       })
@@ -722,9 +519,6 @@ describe('Criteria Desktop Viewport Tests', () => {
         const data = [{
           type: 'criterionOne',
           value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
         }]
 
         const criteria = {
@@ -736,28 +530,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 value: '',
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
-              }
-            }
-          },
-          criterionTwo: {
-            label: 'Criterion Two',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
               }
             }
           }
@@ -772,7 +544,7 @@ describe('Criteria Desktop Viewport Tests', () => {
         )
       })
 
-      describe('having a updated a criterion', () => {
+      describe('having an updated a criterion', () => {
         beforeEach(() => {
           fireEvent.click(info.getByText('Criterion One'))
 
@@ -811,9 +583,6 @@ describe('Criteria Desktop Viewport Tests', () => {
         const data = [{
           type: 'criterionOne',
           value: 'criterion-one-value'
-        }, {
-          type: 'criterionTwo',
-          value: 'criterion-two-value'
         }]
 
         const criteria = {
@@ -838,17 +607,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 placeholder: 'Enter value for criterion two'
               }
             }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
-              }
-            }
           }
         }
 
@@ -867,12 +625,12 @@ describe('Criteria Desktop Viewport Tests', () => {
 
           fireEvent.change(
             info.getByLabelText('Criterion Type'),
-            { target: { value: 'criterionThree' } }
+            { target: { value: 'criterionTwo' } }
           )
 
           fireEvent.change(
-            info.getByLabelText('Criterion Three'),
-            { target: { value: 'criteria-three-value' }}
+            info.getByLabelText('Criterion Two'),
+            { target: { value: 'criterion-two-value' }}
           )
 
           fireEvent.click(info.getByText('Submit'))
@@ -880,6 +638,7 @@ describe('Criteria Desktop Viewport Tests', () => {
 
         it('should invoke the onChange listener with the newly updated criteria', () => {
           expect(onChange).toHaveBeenCalledTimes(1)
+
           expect(onChange).toHaveBeenCalledWith([
             {
               type: 'criterionOne',
@@ -887,9 +646,6 @@ describe('Criteria Desktop Viewport Tests', () => {
             }, {
               type: 'criterionTwo',
               value: 'criterion-two-value'
-            }, {
-              type: 'criterionThree',
-              value: 'criteria-three-value'
             }
           ])
         })
@@ -938,17 +694,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 value: '',
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
               }
             }
           }
@@ -1022,17 +767,6 @@ describe('Criteria Desktop Viewport Tests', () => {
                 value: '',
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
-              }
-            }
-          },
-          criterionThree: {
-            label: 'Criterion Three',
-            component: {
-              component: CriterionField,
-              props: {
-                value: '',
-                onChange: () => {},
-                placeholder: 'Enter value for criterion three'
               }
             }
           }

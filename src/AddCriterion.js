@@ -77,8 +77,8 @@ function AddCriterion (props) {
 
       <Button
         variant='primary'
-        onClick={onSubmit}
         disabled={!isFormSubmittable}
+        onClick={onSubmit}
       >
         {i18nSubmit}
       </Button>

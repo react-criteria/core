@@ -122,9 +122,7 @@ function CriteriaMobile (props) {
 
   return (
     <>
-      <Button
-        onClick={toggleModalOpenState}
-      >
+      <Button onClick={toggleModalOpenState}>
         {i18nModalButton}
       </Button>
 
@@ -140,8 +138,8 @@ function CriteriaMobile (props) {
             ]}
           >
             <>
-            {criterionDOM}
-            {addCriterionDOM}
+              {criterionDOM}
+              {addCriterionDOM}
             </>
           </Modal>
         )
