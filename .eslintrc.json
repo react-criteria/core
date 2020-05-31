@@ -16,5 +16,10 @@
       "error",
       { "varsIgnorePattern": "^_+" }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
