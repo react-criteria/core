@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
-import { useTheme } from './Theme'
 import Popover from './Popover'
+import { useTheme } from './Theme'
 import Criterion from './Criterion'
 import useI18nLabel from './hooks/useI18nLabel'
 import useCriterionSummaryValue from './hooks/useCriterionSummaryValue'
@@ -183,10 +183,10 @@ function CriterionDesktop (props) {
             <Criterion
               value={value}
               deleteable={deleteable}
+              criterionInfo={criterionInfo}
               onChange={onChange}
               onDelete={onDelete}
               onCancel={onPopoverClose}
-              criterionInfo={criterionInfo}
             />
           </Popover>
         )

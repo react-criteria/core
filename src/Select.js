@@ -1,8 +1,8 @@
 import React from 'react'
+import useDOMID from 'use-dom-id'
 import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 import { useTheme } from './Theme'
-import useDOMID from 'use-dom-id'
 
 const useStyles = createUseStyles({
   rootGutterBottom: {
