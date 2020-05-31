@@ -1,5 +1,4 @@
 import React from 'react'
-import '@testing-library/jest-dom'
 import useDOMID from 'use-dom-id'
 import { act, render, fireEvent } from '@testing-library/react'
 
