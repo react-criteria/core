@@ -1066,7 +1066,7 @@ describe('Criteria Mobile Viewport Tests', () => {
           expect(info.queryByText('Submit')).not.toBeDisabled()
         })
 
-        it('should not be updateable if the value has not the same', () => {
+        it('should not be updateable if the value has not changed', () => {
           fireEvent.change(
             info.getByLabelText('Criterion One'),
             { target: { value: 'criterion-one-value' } }

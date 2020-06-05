@@ -65,7 +65,7 @@ function AddCriterion (props) {
     if (selectedCriterion == null) return false
 
     if (typeof selectedCriterion.validate !== 'function') return true
-    return selectedCriterion.validate(value)
+    return selectedCriterion.validate(value) === true
   }, [value, selectedCriterion])
 
   return (

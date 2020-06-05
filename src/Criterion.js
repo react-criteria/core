@@ -72,7 +72,7 @@ function Criterion (props) {
     if (value === valueProp) return false
 
     if (typeof criterionInfo.validate !== 'function') return true
-    return criterionInfo.validate(value)
+    return criterionInfo.validate(value) === true
   })
 
   return (
