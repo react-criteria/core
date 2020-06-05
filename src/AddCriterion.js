@@ -18,8 +18,8 @@ function AddCriterion (props) {
   } = props
 
   const [value, setValue] = React.useState('')
-  const [selectedCriterion, setSelectedCriterion] = React.useState('')
-  const isFormSubmittable = selectedCriterion !== ''
+  const [selectedCriterionName, setSelectedCriterionName] = React.useState('')
+  const selectedCriterion = criteria[selectedCriterionName]
 
   const i18nType = useI18nLabel('add-criterion.type')
   const i18nSubmit = useI18nLabel('add-criterion.submit')
@@ -30,9 +30,9 @@ function AddCriterion (props) {
 
     onSubmitProp({
       value: value,
-      type: selectedCriterion
+      type: selectedCriterionName
     })
-  }, [onSubmitProp, value, selectedCriterion])
+  }, [onSubmitProp, value, selectedCriterionName])
 
   const criteriaOptions = React.useMemo(() => {
     return [
@@ -56,10 +56,17 @@ function AddCriterion (props) {
   }, [criteria, i18nTypePlaceholder])
 
   const selectedCriterionDOM = useCriterionComponent(
-    criteria[selectedCriterion],
+    selectedCriterion,
     value,
     setValue
   )
+
+  const isFormSubmittable = React.useMemo(() => {
+    if (selectedCriterion == null) return false
+
+    if (typeof selectedCriterion.validate !== 'function') return true
+    return selectedCriterion.validate(value) === true
+  }, [value, selectedCriterion])
 
   return (
     <>
@@ -67,8 +74,8 @@ function AddCriterion (props) {
         gutterBottom
         label={i18nType}
         options={criteriaOptions}
-        value={selectedCriterion}
-        onChange={setSelectedCriterion}
+        value={selectedCriterionName}
+        onChange={setSelectedCriterionName}
       />
 
       {selectedCriterionDOM}

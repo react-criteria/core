@@ -658,6 +658,85 @@ describe('Criteria Desktop Viewport Tests', () => {
     })
   })
 
+  describe('Adding a criterion that has validation logic', () => {
+    describe('Given a Criteria component', () => {
+      let info = null
+      let onChange = null
+
+      beforeEach(() => {
+        onChange = jest.fn()
+
+        const data = [{
+          type: 'criterionOne',
+          value: 'criterion-one-value'
+        }]
+
+        const criteria = {
+          criterionOne: {
+            label: 'Criterion One',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion one'
+              }
+            }
+          },
+          criterionTwo: {
+            label: 'Criterion Two',
+            validate: value => value === 'criterion-two-value',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion two'
+              }
+            }
+          }
+        }
+
+        info = render(
+          <Criteria
+            data={data}
+            criteria={criteria}
+            onChange={onChange}
+          />
+        )
+      })
+
+      describe('when attempting to add a new criterion that has validation logic', () => {
+        beforeEach(() => {
+          fireEvent.click(info.getByText('Add'))
+
+          fireEvent.change(
+            info.getByLabelText('Criterion Type'),
+            { target: { value: 'criterionTwo' } }
+          )
+        })
+
+        it('should be addable when the specified value is valid', () => {
+          fireEvent.change(
+            info.getByLabelText('Criterion Two'),
+            { target: { value: 'criterion-two-value' }}
+          )
+
+          expect(info.queryByText('Submit')).not.toBeDisabled()
+        })
+
+        it('should not be addable when the specified value is invalid', () => {
+          fireEvent.change(
+            info.getByLabelText('Criterion Two'),
+            { target: { value: 'invalid-value' }}
+          )
+
+          expect(info.queryByText('Submit')).toBeDisabled()
+        })
+      })
+    })
+  })
+
   describe('Removing an existing criterion', () => {
     describe('Given a Criteria component', () => {
       let info = null
@@ -808,6 +887,92 @@ describe('Criteria Desktop Viewport Tests', () => {
 
         it('should close the panel of the updated criteria', () => {
           expect(info.queryByLabelText('Criterion One')).not.toBeInTheDocument()
+        })
+      })
+    })
+  })
+
+  describe('Updating an existing criterion that has validation logic', () => {
+    describe('Given a Criteria component', () => {
+      let info = null
+      let onChange = null
+
+      beforeEach(() => {
+        onChange = jest.fn()
+
+        const data = [{
+          type: 'criterionOne',
+          value: 'criterion-one-value'
+        }, {
+          type: 'criterionTwo',
+          value: 'criterion-two-value'
+        }]
+
+        const criteria = {
+          criterionOne: {
+            label: 'Criterion One',
+            validate: value => value === 'updated-criterion-one-value',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion one'
+              }
+            }
+          },
+          criterionTwo: {
+            label: 'Criterion Two',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                onChange: () => {},
+                placeholder: 'Enter value for criterion two'
+              }
+            }
+          }
+        }
+
+        info = render(
+          <Criteria
+            data={data}
+            criteria={criteria}
+            onChange={onChange}
+          />
+        )
+      })
+
+      describe('when attempting to update an existing criterion that has validation logic', () => {
+        beforeEach(() => {
+          fireEvent.click(info.getByText('Criterion One'))
+        })
+
+        it('should be updateable if the value is valid', () => {
+          fireEvent.change(
+            info.getByLabelText('Criterion One'),
+            { target: { value: 'updated-criterion-one-value' } }
+          )
+
+          expect(info.queryByText('Submit')).not.toBeDisabled()
+        })
+
+        it('should not be updateable if the value has not changed', () => {
+          fireEvent.change(
+            info.getByLabelText('Criterion One'),
+            { target: { value: 'criterion-one-value' } }
+          )
+
+          expect(info.queryByText('Submit')).toBeDisabled()
+        })
+
+        it('should not be updateable if the value is invalid', () => {
+          fireEvent.change(
+            info.getByLabelText('Criterion One'),
+            { target: { value: 'updated-invalid-value' } }
+          )
+
+          expect(info.queryByText('Submit')).toBeDisabled()
         })
       })
     })

@@ -74,6 +74,7 @@ CriterionMobile.propTypes = {
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
     label: PropTypes.string,
+    validate: PropTypes.func,
     component: PropTypes.shape({
       props: PropTypes.object,
       component: PropTypes.elementType

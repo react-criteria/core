@@ -21,6 +21,7 @@ Criterion.propTypes = {
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
     label: PropTypes.string,
+    validate: PropTypes.func,
     component: PropTypes.shape({
       props: PropTypes.object,
       component: PropTypes.elementType
@@ -41,7 +42,6 @@ function Criterion (props) {
   const classes = useStyles()
 
   const [value, setValue] = React.useState(valueProp)
-  const isFormSubmittable = value !== valueProp
 
   const i18nSubmit = useI18nLabel('criterion.submit')
   const i18nCancel = useI18nLabel('criterion.cancel')
@@ -67,6 +67,13 @@ function Criterion (props) {
     value,
     setValue
   )
+
+  const isFormSubmittable = React.useMemo(() => {
+    if (value === valueProp) return false
+
+    if (typeof criterionInfo.validate !== 'function') return true
+    return criterionInfo.validate(value) === true
+  })
 
   return (
     <div>
