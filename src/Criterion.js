@@ -73,7 +73,7 @@ function Criterion (props) {
 
     if (typeof criterionInfo.validate !== 'function') return true
     return criterionInfo.validate(value) === true
-  })
+  }, [value, valueProp, criterionInfo])
 
   return (
     <div>
