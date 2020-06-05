@@ -85,33 +85,6 @@ export const Default = () => {
   )
 }
 
-export const UnaddableCriterions = () => {
-  return (
-    <Criteria
-      data={[{
-        type: 'beds',
-        value: '2'
-      }]}
-      criteria={{
-        beds: {
-          label: 'Beds',
-          addable: false,
-          component: {
-            component: Textfield,
-            props: {
-              min: 0,
-              max: 3,
-              type: 'number',
-              autoFocus: true,
-              placeholder: 'Enter number of beds'
-            }
-          }
-        }
-      }}
-    />
-  )
-}
-
 export const UndeleteableCriterions = () => {
   const [data, setData] = React.useState(
     [{
@@ -176,6 +149,65 @@ export const UndeleteableCriterions = () => {
                   }
                 }
               )
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+
+export const UnaddableCriterions = () => {
+  const [data, setData] = React.useState([{
+    type: 'beds',
+    value: '2',
+    deleteable: false
+  }])
+
+  return (
+    <Criteria
+      data={data}
+      onChange={setData}
+      criteria={{
+        beds: {
+          label: 'Beds',
+          addable: false,
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 3,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of beds'
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+
+export const CriterionValidations = () => {
+  const [data, setData] = React.useState([{
+    type: 'beds',
+    value: '2'
+  }])
+
+  return (
+    <Criteria
+      data={data}
+      onChange={setData}
+      criteria={{
+        beds: {
+          label: 'Beds',
+          validate: value => value > 0 && value < 10,
+          component: {
+            component: Textfield,
+            props: {
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of beds'
             }
           }
         }
