@@ -43,6 +43,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -54,6 +55,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -65,6 +67,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion three'
               }
@@ -105,6 +108,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -139,6 +143,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -151,6 +156,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -194,6 +200,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -237,6 +244,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -262,6 +270,70 @@ describe('Criteria Desktop Viewport Tests', () => {
     })
   })
 
+  describe('Specifying an unupdatable criterion', () => {
+    describe('Given a Criteria component with an unupdatable criterion', () => {
+      let info = null
+
+      beforeEach(() => {
+        const data = [{
+          updatable: false,
+          type: 'criterionOne',
+          value: 'criterion-one-value'
+        }, {
+          type: 'criterionTwo',
+          value: 'criterion-two-value'
+        }]
+
+        const criteria = {
+          criterionOne: {
+            label: 'Criterion One',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                disabled: true,
+                onChange: () => {},
+                placeholder: 'Enter value for criterion one'
+              }
+            }
+          },
+          criterionTwo: {
+            label: 'Criterion Two',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                disabled: true,
+                onChange: () => {},
+                placeholder: 'Enter value for criterion two'
+              }
+            }
+          }
+        }
+
+        info = render(
+          <Criteria
+            data={data}
+            criteria={criteria}
+            onChange={jest.fn()}
+          />
+        )
+      })
+
+      it('should not allow the user to update the unupdatable criterion', () => {
+        fireEvent.click(info.getByText('Criterion One'))
+        expect(info.queryByText('Submit')).not.toBeInTheDocument()
+        expect(info.queryByLabelText('Criterion One')).toBeDisabled()
+
+        fireEvent.click(info.getByTitle('Close Criterion'))
+
+        fireEvent.click(info.getByText('Criterion Two'))
+        expect(info.queryByText('Submit')).toBeInTheDocument()
+        expect(info.queryByLabelText('Criterion Two')).not.toBeDisabled()
+      })
+    })
+  })
+
   describe('Specifying an undeletable criterion', () => {
     describe('Given a Criteria component with an undeletable criterion', () => {
       let info = null
@@ -283,6 +355,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -294,6 +367,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -339,6 +413,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -392,6 +467,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -460,6 +536,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -528,6 +605,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -592,6 +670,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -603,6 +682,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -678,6 +758,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -690,6 +771,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -760,6 +842,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -771,6 +854,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -833,6 +917,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -844,6 +929,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -916,6 +1002,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -927,6 +1014,7 @@ describe('Criteria Desktop Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }

@@ -17,6 +17,7 @@ export default function useCriterionComponent (props) {
       value: _,
       label: __,
       onChange: ___,
+      disabled: ____,
       ...criterionProps
     } = criterionInfo.component.props
 
