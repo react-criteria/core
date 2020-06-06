@@ -64,7 +64,8 @@ CriterionDesktop.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onDelete: PropTypes.func,
-  deleteable: PropTypes.bool,
+  updatable: PropTypes.bool,
+  deletable: PropTypes.bool,
   onActiveChange: PropTypes.func,
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
@@ -80,7 +81,8 @@ CriterionDesktop.propTypes = {
 function CriterionDesktop (props) {
   const {
     value,
-    deleteable,
+    updatable,
+    deletable,
     criterionInfo,
     active = false,
     disabled = false,
@@ -183,7 +185,8 @@ function CriterionDesktop (props) {
           >
             <Criterion
               value={value}
-              deleteable={deleteable}
+              updatable={updatable}
+              deletable={deletable}
               criterionInfo={criterionInfo}
               onChange={onChange}
               onDelete={onDelete}

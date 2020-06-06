@@ -262,13 +262,13 @@ describe('Criteria Desktop Viewport Tests', () => {
     })
   })
 
-  describe('Specifying an undeleteable criterion', () => {
-    describe('Given a Criteria component with an undeleteable criterion', () => {
+  describe('Specifying an undeletable criterion', () => {
+    describe('Given a Criteria component with an undeletable criterion', () => {
       let info = null
 
       beforeEach(() => {
         const data = [{
-          deleteable: false,
+          deletable: false,
           type: 'criterionOne',
           value: 'criterion-one-value'
         }, {
@@ -310,7 +310,7 @@ describe('Criteria Desktop Viewport Tests', () => {
         )
       })
 
-      it('should not allow the user to delete the undeleteable criterion', () => {
+      it('should not allow the user to delete the undeletable criterion', () => {
         fireEvent.click(info.getByText('Criterion One'))
         expect(info.queryByText('Remove')).not.toBeInTheDocument()
 
@@ -948,7 +948,7 @@ describe('Criteria Desktop Viewport Tests', () => {
           fireEvent.click(info.getByText('Criterion One'))
         })
 
-        it('should be updateable if the value is valid', () => {
+        it('should be updatable if the value is valid', () => {
           fireEvent.change(
             info.getByLabelText('Criterion One'),
             { target: { value: 'updated-criterion-one-value' } }
@@ -957,7 +957,7 @@ describe('Criteria Desktop Viewport Tests', () => {
           expect(info.queryByText('Submit')).not.toBeDisabled()
         })
 
-        it('should not be updateable if the value has not changed', () => {
+        it('should not be updatable if the value has not changed', () => {
           fireEvent.change(
             info.getByLabelText('Criterion One'),
             { target: { value: 'criterion-one-value' } }
@@ -966,7 +966,7 @@ describe('Criteria Desktop Viewport Tests', () => {
           expect(info.queryByText('Submit')).toBeDisabled()
         })
 
-        it('should not be updateable if the value is invalid', () => {
+        it('should not be updatable if the value is invalid', () => {
           fireEvent.change(
             info.getByLabelText('Criterion One'),
             { target: { value: 'updated-invalid-value' } }

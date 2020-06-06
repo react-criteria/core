@@ -69,7 +69,8 @@ CriterionMobile.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   onDelete: PropTypes.func,
-  deleteable: PropTypes.bool,
+  updatable: PropTypes.bool,
+  deletable: PropTypes.bool,
   onActiveChange: PropTypes.func,
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
@@ -86,7 +87,8 @@ function CriterionMobile (props) {
   const {
     value,
     active,
-    deleteable,
+    updatable,
+    deletable,
     criterionInfo,
     onDelete: onDeleteProp,
     onChange: onChangeProp,
@@ -159,7 +161,8 @@ function CriterionMobile (props) {
           <div className={classes.form}>
             <Criterion
               value={value}
-              deleteable={deleteable}
+              updatable={updatable}
+              deletable={deletable}
               criterionInfo={criterionInfo}
               onChange={onChange}
               onDelete={onDelete}
