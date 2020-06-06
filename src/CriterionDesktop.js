@@ -11,12 +11,12 @@ const useStyles = createUseStyles({
   root: theme => ({
     display: 'flex',
     flexShrink: '0',
+    outline: 'none',
     minWidth: '64px',
     cursor: 'pointer',
     userSelect: 'none',
     padding: '7px 8px',
     borderRadius: '2px',
-    outlineOffset: '-4px',
     transitionDuration: '.2s',
     backgroundColor: 'transparent',
     border: `solid 1px ${theme.container.borderColor}`,
@@ -27,6 +27,7 @@ const useStyles = createUseStyles({
     },
 
     '&:focus, &:hover': {
+      borderColor: theme.palette.primary,
       backgroundColor: theme.button.defaultHoverBackgroundColor
     }
   }),
