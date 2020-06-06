@@ -11,12 +11,12 @@ const useStyles = createUseStyles({
   root: theme => ({
     display: 'flex',
     flexShrink: '0',
+    outline: 'none',
     minWidth: '64px',
     cursor: 'pointer',
     userSelect: 'none',
     padding: '7px 8px',
     borderRadius: '2px',
-    outlineOffset: '-4px',
     transitionDuration: '.2s',
     backgroundColor: 'transparent',
     border: `solid 1px ${theme.container.borderColor}`,
@@ -27,6 +27,7 @@ const useStyles = createUseStyles({
     },
 
     '&:focus, &:hover': {
+      borderColor: theme.palette.primary,
       backgroundColor: theme.button.defaultHoverBackgroundColor
     }
   }),
@@ -64,7 +65,8 @@ CriterionDesktop.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onDelete: PropTypes.func,
-  deleteable: PropTypes.bool,
+  updatable: PropTypes.bool,
+  deletable: PropTypes.bool,
   onActiveChange: PropTypes.func,
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
@@ -80,7 +82,8 @@ CriterionDesktop.propTypes = {
 function CriterionDesktop (props) {
   const {
     value,
-    deleteable,
+    updatable,
+    deletable,
     criterionInfo,
     active = false,
     disabled = false,
@@ -183,7 +186,8 @@ function CriterionDesktop (props) {
           >
             <Criterion
               value={value}
-              deleteable={deleteable}
+              updatable={updatable}
+              deletable={deletable}
               criterionInfo={criterionInfo}
               onChange={onChange}
               onDelete={onDelete}

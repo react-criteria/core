@@ -85,12 +85,12 @@ export const Default = () => {
   )
 }
 
-export const UndeleteableCriterions = () => {
+export const NonUpdateableCriterions = () => {
   const [data, setData] = React.useState(
     [{
       type: 'location',
       value: '1',
-      deleteable: false
+      updatable: false
     }]
   )
 
@@ -157,17 +157,143 @@ export const UndeleteableCriterions = () => {
   )
 }
 
-export const UnaddableCriterions = () => {
-  const [data, setData] = React.useState([{
-    type: 'beds',
-    value: '2',
-    deleteable: false
-  }])
+export const NonDeletableCriterions = () => {
+  const [data, setData] = React.useState(
+    [{
+      type: 'location',
+      value: '1',
+      deletable: false
+    }]
+  )
+
+  const onChange = React.useCallback(newData => {
+    setData(newData)
+    action('onDataChange')(newData)
+  }, [])
+
+  const locations = [
+    'Malta', 'Italy', 'Spain', 'France', 'Germany'
+  ]
 
   return (
     <Criteria
       data={data}
-      onChange={setData}
+      onChange={onChange}
+      criteria={{
+        guests: {
+          label: 'Guests',
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 6,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of guests'
+            }
+          }
+        },
+        beds: {
+          label: 'Beds',
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 3,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of beds'
+            }
+          }
+        },
+        location: {
+          label: 'Location',
+          value: value => locations[value],
+          component: {
+            component: Select,
+            props: {
+              autoFocus: true,
+              options: locations.map(
+                (location, index) => {
+                  return {
+                    value: String(index),
+                    label: location
+                  }
+                }
+              )
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+
+export const NonAddableCriterions = () => {
+  const [data, setData] = React.useState([{
+    type: 'beds',
+    value: '2',
+    deletable: false
+  }])
+
+  const onChange = React.useCallback(newData => {
+    setData(newData)
+    action('onDataChange')(newData)
+  }, [])
+
+  return (
+    <Criteria
+      data={data}
+      onChange={onChange}
+      criteria={{
+        beds: {
+          label: 'Beds',
+          addable: false,
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 3,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of beds'
+            }
+          }
+        },
+        guests: {
+          label: 'Guests',
+          component: {
+            component: Textfield,
+            props: {
+              min: 0,
+              max: 3,
+              type: 'number',
+              autoFocus: true,
+              placeholder: 'Enter number of guests'
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+
+export const NoAddableCriterions = () => {
+  const [data, setData] = React.useState([{
+    type: 'beds',
+    value: '2',
+    deletable: false
+  }])
+
+  const onChange = React.useCallback(newData => {
+    setData(newData)
+    action('onDataChange')(newData)
+  }, [])
+
+  return (
+    <Criteria
+      data={data}
+      onChange={onChange}
       criteria={{
         beds: {
           label: 'Beds',
@@ -194,10 +320,15 @@ export const CriterionValidations = () => {
     value: '2'
   }])
 
+  const onChange = React.useCallback(newData => {
+    setData(newData)
+    action('onDataChange')(newData)
+  }, [])
+
   return (
     <Criteria
       data={data}
-      onChange={setData}
+      onChange={onChange}
       criteria={{
         beds: {
           label: 'Beds',

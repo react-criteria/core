@@ -43,6 +43,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -54,6 +55,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -65,6 +67,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion three'
               }
@@ -107,6 +110,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -118,6 +122,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -129,6 +134,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion three'
               }
@@ -182,6 +188,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -193,6 +200,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -204,6 +212,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion three'
               }
@@ -255,6 +264,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -291,6 +301,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -303,6 +314,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -348,6 +360,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -393,6 +406,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -420,13 +434,13 @@ describe('Criteria Mobile Viewport Tests', () => {
     })
   })
 
-  describe('Specifying an undeleteable criterion', () => {
-    describe('Given a Criteria component with an undeleteable criterion', () => {
+  describe('Specifying an unupdatable criterion', () => {
+    describe('Given a Criteria component with an unupdatable criterion', () => {
       let info = null
 
       beforeEach(() => {
         const data = [{
-          deleteable: false,
+          updatable: false,
           type: 'criterionOne',
           value: 'criterion-one-value'
         }, {
@@ -441,6 +455,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -452,6 +467,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -470,7 +486,71 @@ describe('Criteria Mobile Viewport Tests', () => {
         fireEvent.click(info.getByText('Manage Criteria (2)'))
       })
 
-      it('should not allow the user to delete the undeleteable criterion', () => {
+      it('should not allow the user to update the unupdatable criterion', () => {
+        fireEvent.click(info.getByText('Criterion One'))
+        expect(info.queryByText('Submit')).not.toBeInTheDocument()
+        expect(info.queryByLabelText('Criterion One')).toBeDisabled()
+
+        fireEvent.click(info.getByText('Criterion Two'))
+        expect(info.queryByText('Submit')).toBeInTheDocument()
+        expect(info.queryByLabelText('Criterion Two')).not.toBeDisabled()
+      })
+    })
+  })
+
+  describe('Specifying an undeletable criterion', () => {
+    describe('Given a Criteria component with an undeletable criterion', () => {
+      let info = null
+
+      beforeEach(() => {
+        const data = [{
+          deletable: false,
+          type: 'criterionOne',
+          value: 'criterion-one-value'
+        }, {
+          type: 'criterionTwo',
+          value: 'criterion-two-value'
+        }]
+
+        const criteria = {
+          criterionOne: {
+            label: 'Criterion One',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                disabled: true,
+                onChange: () => {},
+                placeholder: 'Enter value for criterion one'
+              }
+            }
+          },
+          criterionTwo: {
+            label: 'Criterion Two',
+            component: {
+              component: CriterionField,
+              props: {
+                value: '',
+                disabled: true,
+                onChange: () => {},
+                placeholder: 'Enter value for criterion two'
+              }
+            }
+          }
+        }
+
+        info = render(
+          <Criteria
+            data={data}
+            criteria={criteria}
+            onChange={jest.fn()}
+          />
+        )
+
+        fireEvent.click(info.getByText('Manage Criteria (2)'))
+      })
+
+      it('should not allow the user to delete the undeletable criterion', () => {
         fireEvent.click(info.getByText('Criterion One'))
         expect(info.queryByText('Remove')).not.toBeInTheDocument()
 
@@ -497,6 +577,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -552,6 +633,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -622,6 +704,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -688,6 +771,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -699,6 +783,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -779,6 +864,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -791,6 +877,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -863,6 +950,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -874,6 +962,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -938,6 +1027,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -949,6 +1039,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -1023,6 +1114,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion one'
               }
@@ -1034,6 +1126,7 @@ describe('Criteria Mobile Viewport Tests', () => {
               component: CriterionField,
               props: {
                 value: '',
+                disabled: true,
                 onChange: () => {},
                 placeholder: 'Enter value for criterion two'
               }
@@ -1057,7 +1150,7 @@ describe('Criteria Mobile Viewport Tests', () => {
           fireEvent.click(info.getByText('Criterion One'))
         })
 
-        it('should be updateable if the value is valid', () => {
+        it('should be updatable if the value is valid', () => {
           fireEvent.change(
             info.getByLabelText('Criterion One'),
             { target: { value: 'updated-criterion-one-value' } }
@@ -1066,7 +1159,7 @@ describe('Criteria Mobile Viewport Tests', () => {
           expect(info.queryByText('Submit')).not.toBeDisabled()
         })
 
-        it('should not be updateable if the value has not changed', () => {
+        it('should not be updatable if the value has not changed', () => {
           fireEvent.change(
             info.getByLabelText('Criterion One'),
             { target: { value: 'criterion-one-value' } }
@@ -1075,7 +1168,7 @@ describe('Criteria Mobile Viewport Tests', () => {
           expect(info.queryByText('Submit')).toBeDisabled()
         })
 
-        it('should not be updateable if the value is invalid', () => {
+        it('should not be updatable if the value is invalid', () => {
           fireEvent.change(
             info.getByLabelText('Criterion One'),
             { target: { value: 'updated-invalid-value' } }

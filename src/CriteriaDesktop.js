@@ -45,7 +45,8 @@ CriteriaDesktop.propTypes = {
   onDeleteCriterion: PropTypes.func,
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      deleteable: PropTypes.bool,
+      updatable: PropTypes.bool,
+      deletable: PropTypes.bool,
       type: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired
     })
@@ -109,7 +110,8 @@ function CriteriaDesktop (props) {
           disabled={disabled}
           value={criterion.value}
           criterionInfo={criterionInfo}
-          deleteable={criterion.deleteable}
+          updatable={criterion.updatable}
+          deletable={criterion.deletable}
           onDelete={() => onDeleteCriterion(index)}
           onActiveChange={state => onActiveItemChange(id, state)}
           onChange={

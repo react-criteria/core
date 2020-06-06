@@ -55,11 +55,11 @@ function AddCriterion (props) {
     ]
   }, [criteria, i18nTypePlaceholder])
 
-  const selectedCriterionDOM = useCriterionComponent(
-    selectedCriterion,
+  const selectedCriterionDOM = useCriterionComponent({
     value,
-    setValue
-  )
+    onChange: setValue,
+    criterionInfo: selectedCriterion
+  })
 
   const isFormSubmittable = React.useMemo(() => {
     if (selectedCriterion == null) return false

@@ -16,7 +16,8 @@ Criterion.propTypes = {
   onChange: PropTypes.func,
   onDelete: PropTypes.func,
   onCancel: PropTypes.func,
-  deleteable: PropTypes.bool,
+  updatable: PropTypes.bool,
+  deletable: PropTypes.bool,
   value: PropTypes.string.isRequired,
   criterionInfo: PropTypes.shape({
     value: PropTypes.func,
@@ -33,7 +34,8 @@ function Criterion (props) {
   const {
     criterionInfo,
     value: valueProp,
-    deleteable = true,
+    updatable = true,
+    deletable = true,
     onChange: onChangeProp,
     onDelete: onDeleteProp,
     onCancel: onCancelProp
@@ -62,11 +64,17 @@ function Criterion (props) {
     onChangeProp(value)
   }, [onChangeProp, value])
 
-  const selectedCriterionDOM = useCriterionComponent(
-    criterionInfo,
+  const onValueChange = React.useCallback(newValue => {
+    if (updatable === false) return
+    setValue(newValue)
+  }, [updatable])
+
+  const selectedCriterionDOM = useCriterionComponent({
     value,
-    setValue
-  )
+    criterionInfo,
+    disabled: !updatable,
+    onChange: onValueChange
+  })
 
   const isFormSubmittable = React.useMemo(() => {
     if (value === valueProp) return false
@@ -82,20 +90,24 @@ function Criterion (props) {
       <Divider />
 
       <div className={classes.actions}>
-        <Button
-          variant='primary'
-          onClick={onChange}
-          disabled={isFormSubmittable === false}
-        >
-          {i18nSubmit}
-        </Button>
+        {
+          updatable !== false && (
+            <Button
+              variant='primary'
+              onClick={onChange}
+              disabled={isFormSubmittable === false}
+            >
+              {i18nSubmit}
+            </Button>
+          )
+        }
 
         <Button onClick={onCancel}>
           {i18nCancel}
         </Button>
 
         {
-          deleteable !== false && (
+          deletable !== false && (
             <Button onClick={onDelete}>
               {i18nRemove}
             </Button>
