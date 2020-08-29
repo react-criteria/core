@@ -18,6 +18,10 @@
 
 You need a widget that a user can use to specify any criteria of data rendered in your app. Be it for filtering, sorting, grouping; you name it. You want this widget to be responsive, accessible and easy to integrate. You also want it to have support for configurable labels for internationalization, to be themeable so that it blends in flawlessly into your UI and to be easily extendable - enabling you to support any type of criteria.
 
+## Demo
+
+[Click here](https://codesandbox.io/s/react-criteria-demo-4w8fv?fontsize=14&hidenavigation=1&theme=dark) for a demo of all the features offered by `react-criteria`.
+
 ## Install
 
 ### NPM
@@ -57,7 +61,6 @@ function MyComponent () {
 
   const onChange = React.useCallback(newData => {
     setData(newData)
-    action('onDataChange')(newData)
   }, [])
 
   const locations = [
