@@ -1,6 +1,6 @@
 {
   "name": "react-criteria",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "React criteria component",
   "main": "dist/main.js",
   "scripts": {
@@ -39,6 +39,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.0.4",
     "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-jss": "^10.6.0",
     "uuid": "^8.3.2",
     "webpack": "^5.38.1",
