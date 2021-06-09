@@ -1,8 +1,9 @@
 import React from 'react'
-import useDOMID from 'use-dom-id'
 import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
+
 import { useTheme } from './Theme'
+import useID from './hooks/useID'
 
 const useStyles = createUseStyles({
   rootGutterBottom: {
@@ -49,7 +50,7 @@ function Select (props) {
     ...otherProps
   } = props
 
-  const id = useDOMID('select')
+  const id = useID()
   const classes = useStyles(useTheme())
 
   const onChange = React.useCallback(ev => {

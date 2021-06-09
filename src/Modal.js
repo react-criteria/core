@@ -1,7 +1,8 @@
 import React from 'react'
-import useDOMID from 'use-dom-id'
 import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
+
+import useID from './hooks/useID'
 import { useTheme } from './Theme'
 
 const useStyle = createUseStyles({
@@ -60,9 +61,9 @@ function Modal (props) {
     description
   } = props
 
+  const titleID = useID()
+  const descriptionID = useID()
   const classes = useStyle(useTheme())
-  const titleID = useDOMID('modal-title')
-  const descriptionID = useDOMID('modal-description')
 
   return (
     <div

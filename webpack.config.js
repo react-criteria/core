@@ -2,17 +2,12 @@
 
 module.exports = {
   output: {
-    library: 'ReactCriteria',
-    libraryTarget: 'umd'
-  },
-  externals: {
-    react: {
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react',
-      root: 'React'
+    library: {
+      type: 'umd',
+      name: 'ReactCriteria'
     }
   },
+  externals: ['react'],
   module: {
     rules: [
       {
