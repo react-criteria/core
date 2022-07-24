@@ -1,6 +1,6 @@
 {
   "name": "react-criteria",
-  "version": "0.6.1",
+  "version": "1.0.0",
   "description": "React criteria component",
   "main": "dist/main.js",
   "scripts": {
