@@ -1,5 +1,8 @@
 'use strict'
 
+const ESLintPlugin = require('eslint-webpack-plugin')
+const babelOptions = require('./babel.config')
+
 module.exports = {
   output: {
     library: {
@@ -8,22 +11,16 @@ module.exports = {
     }
   },
   externals: ['react'],
+  plugins: [new ESLintPlugin()],
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
+          options: babelOptions
         }
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader'
       }
     ]
   }
