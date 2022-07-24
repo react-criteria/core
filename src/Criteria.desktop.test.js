@@ -2,7 +2,6 @@ import React from 'react'
 import { act, render, fireEvent } from '@testing-library/react'
 
 import Criteria from './Criteria'
-import useID from './hooks/useID'
 
 describe('Criteria Desktop Viewport Tests', () => {
   let originalWindowWidth = null
@@ -1075,7 +1074,7 @@ function CriterionField (props) {
     ...otherProps
   } = props
 
-  const id = useID()
+  const id = React.useId()
 
   const onChange = React.useCallback(ev => {
     if (typeof onChangeProp !== 'function') return

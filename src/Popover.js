@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 
 import { useTheme } from './Theme'
-import useID from './hooks/useID'
 import useI18nLabel from './hooks/useI18nLabel'
 import useWindowWidth from './hooks/useWindowWidth'
 
@@ -56,8 +55,8 @@ function Popover (props) {
     onClose: onCloseProp
   } = props
 
-  const titleID = useID()
-  const descriptionID = useID()
+  const titleID = React.useId()
+  const descriptionID = React.useId()
   const windowWidth = useWindowWidth()
   const classes = useStyles(useTheme())
   const rootElementRef = React.useRef(null)

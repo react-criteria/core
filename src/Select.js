@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 
 import { useTheme } from './Theme'
-import useID from './hooks/useID'
 
 const useStyles = createUseStyles({
   rootGutterBottom: {
@@ -50,7 +49,7 @@ function Select (props) {
     ...otherProps
   } = props
 
-  const id = useID()
+  const id = React.useId()
   const classes = useStyles(useTheme())
 
   const onChange = React.useCallback(ev => {

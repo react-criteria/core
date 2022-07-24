@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 
-import useID from './hooks/useID'
 import { useTheme } from './Theme'
 
 const useStyle = createUseStyles({
@@ -61,8 +60,8 @@ function Modal (props) {
     description
   } = props
 
-  const titleID = useID()
-  const descriptionID = useID()
+  const titleID = React.useId()
+  const descriptionID = React.useId()
   const classes = useStyle(useTheme())
 
   return (
